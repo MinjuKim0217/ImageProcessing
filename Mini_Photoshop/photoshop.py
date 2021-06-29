@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
+from tkinter import filedialog
 from PIL import Image
 from PIL import ImageTk
 
@@ -164,11 +164,15 @@ window = tkinter.Tk()
 window.title("MINI PHOTOSHOP")
 window.geometry("640x480+100+100")
 
-src = cv2.imread("Lena_noise.png")
-src = cv2.resize(src, (640, 400))
+#src = cv2.imread("Lena_noise.png")
 
+path = filedialog.askopenfilename()
+if len(path) > 0:
+    src = cv2.imread(path)
+    src = cv2.resize(src, (640, 400))
+    img = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
 
-img = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
+#img = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
 
 img = Image.fromarray(img)
 imgtk = ImageTk.PhotoImage(image=img)
